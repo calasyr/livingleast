@@ -1,14 +1,43 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>LivingLeast</title>
+  <title>Living Least</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <div class="container-fluid">
+  	<!--  Header ================================== -->
+  	<header>
+      <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="navbar-inner">
+          <div class="container">
+            <a class="brand" href="/">Living Least</a>
+            <div class="nav-collapse collapse">
+              <p class="navbar-text pull-right">
+                <% if user_signed_in? %>
+                  <%= link_to "Sign Out", destroy_user_session_path, :method => :delete, class: "btn btn-small"  %>
+                <% else %>
+                  <%= link_to "Sign In", new_user_session_path, class: "btn btn-small" %> 
+                <% end %> 
+              </p>
+            </div><!--/.nav-collapse -->
+          </div>
+        </div>
+      </div>
+  	</header>
+		
+		<div class="pulldown">
+    	<%= yield %>
+  	</div>
 
-<%= yield %>
-
+    <footer>
+    	<p>LivingLeast. Made in San Francisco.</p>
+    </footer>
+  </div>
 </body>
+
+<%= yield :scripts %>
+
 </html>
