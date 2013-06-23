@@ -28,6 +28,12 @@ end
 
 gem 'jquery-rails'
 
+gem 'less-rails-bootstrap'
+
+gem 'therubyracer'
+
+gem 'devise'
+
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
