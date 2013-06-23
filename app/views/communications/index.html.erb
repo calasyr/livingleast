@@ -1,0 +1,29 @@
+<h1>Listing communications</h1>
+
+<table>
+  <tr>
+    <th>User</th>
+    <th>To</th>
+    <th>Message</th>
+    <th>Purchase</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @communications.each do |communication| %>
+  <tr>
+    <td><%= communication.user_id %></td>
+    <td><%= communication.to_id %></td>
+    <td><%= communication.message %></td>
+    <td><%= communication.purchase_id %></td>
+    <td><%= link_to 'Show', communication %></td>
+    <td><%= link_to 'Edit', edit_communication_path(communication) %></td>
+    <td><%= link_to 'Destroy', communication, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Communication', new_communication_path %>
