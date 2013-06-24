@@ -1,3 +1,6 @@
+require 'Fetcher'
+
+
 class PurchasesController < ApplicationController
   # GET /purchases
   # GET /purchases.json
@@ -50,6 +53,38 @@ class PurchasesController < ApplicationController
         format.html { render action: "new" }
         format.json { render json: @purchase.errors, status: :unprocessable_entity }
       end
+    end
+  end
+
+  def hook
+    message_data = params[:message_data]
+    account_id = params[:account_id]
+    unless message_data.nil?
+      message_id = message_data[:message_id]
+      unless message_id.nil? || account_id.nil?
+        fetcher = Fetcher.new(account_id, message_id)
+        matched = fetcher.fetch
+        unless matched.nil? || matched.valid == false
+
+          purchase = Purchase.new
+          purchase.merchant_name = matched.merchant
+          purchase.category = matched.category
+          purchase.city = matched.location
+          purchase.amount = matched.amount
+
+          if purchase.save
+            render :json => { :result => "ok", :purchase => matched }.as_json, :status => 202
+          else
+            render :json => { :result => "failed to save", :purchase => matched }.as_json, :status => 503
+          end
+        else
+          render :json => { :result => "no purchases found" }.as_json, :status => 204
+        end
+      else
+        render :json => { :result => "fail", :message => "missing message_id"}.as_json, :status => 422
+      end
+    else
+      render :json => { :result => "fail", :message => "missing message_data"}.as_json, :status => 422
     end
   end
 
