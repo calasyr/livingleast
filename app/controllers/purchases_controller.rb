@@ -5,7 +5,8 @@ class PurchasesController < ApplicationController
   # GET /purchases
   # GET /purchases.json
   def index
-    @purchases = Purchase.all
+    @purchases = Purchase.all.reverse
+    @user_purchases = current_user.purchases
 
     respond_to do |format|
       format.html # index.html.erb
@@ -44,6 +45,7 @@ class PurchasesController < ApplicationController
   # POST /purchases.json
   def create
     @purchase = Purchase.new(params[:purchase])
+    @purchase.user_id = current_user.id
 
     respond_to do |format|
       if @purchase.save
@@ -115,4 +117,5 @@ class PurchasesController < ApplicationController
       format.json { head :no_content }
     end
   end
+
 end
