@@ -1,13 +1,17 @@
 LivingLeast::Application.routes.draw do
+  get "splash/index"
+
   devise_for :users
 
   resources :communications
 
   resources :purchases
 
-  root :to => 'purchases#index'
   
   match '/purchases/hook' => 'purchases#hook', :via => [:post]
+
+  root :to => 'splash#index'
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

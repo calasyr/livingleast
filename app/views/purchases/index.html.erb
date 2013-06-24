@@ -1,5 +1,31 @@
-<div class="homeimage">
-  <%= image_tag("livingleastlogoblk.png") %> <br>
-  <h2>Win by spending less than your friends</h2> <br>
-  <%= link_to "Sign Up To Play!", new_user_registration_path, class: "btn btn-success btn-large"  %>
+<div>
+	<h2>Your Purchases<h2>
+		<% @user_purchases.each do |purchase| %>
+	    <div>
+	      <h4 style="color: #347AC9">
+	      	<%= purchase.merchant_name%> 
+	      </h4> 
+	      <p>
+	        <%= purchase.city %> | 
+	        $<%= purchase.amount %> | 
+	        <%= purchase.category %>
+	      </p>
+   		</div>
+   	<% end %>
+	<hr>
+
+
+	<h2>Other's Purchases<h2>		
+		<% @purchases.each do |purchase| %>
+	    <div>
+	      <h4 style="color: #347AC9">
+	      	<%= purchase.merchant_name%> 
+	      </h4> 
+	      <p>
+	        <%= purchase.city %> | 
+	        $<%= purchase.amount %> | 
+	        <%= purchase.category %>
+	      </p>
+   		</div>
+   	<% end %>
 </div>

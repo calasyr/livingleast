@@ -11,8 +11,11 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-
+<<<<<<< HEAD
 ActiveRecord::Schema.define(:version => 20130623235824) do
+=======
+ActiveRecord::Schema.define(:version => 20130623223155) do
+>>>>>>> new user views
 
   create_table "communications", :force => true do |t|
     t.integer  "user_id"
