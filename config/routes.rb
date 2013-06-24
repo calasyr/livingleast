@@ -6,6 +6,8 @@ LivingLeast::Application.routes.draw do
   resources :purchases
 
   root :to => 'purchases#index'
+  
+  match '/purchases/hook' => 'purchases#hook', :via => [:post]
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
