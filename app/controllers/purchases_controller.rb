@@ -66,7 +66,7 @@ class PurchasesController < ApplicationController
       unless message_id.nil? || account_id.nil?
         fetcher = Fetcher.new(account_id, message_id)
         matched = fetcher.fetch
-        unless matched.nil? || matched.valid == false
+        unless matched.nil?
 
           purchase = Purchase.new
           purchase.merchant_name = matched.merchant
